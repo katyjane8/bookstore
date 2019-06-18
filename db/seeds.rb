@@ -21,14 +21,13 @@ csv_text = File.read(Rails.root.join("./data/books.csv"))
 csv = CSV.parse(csv_text.scrub, headers: true)
 csv.each do |row|
   t = Book.new
-  t.title = row['title'],
-  t.author = row['authors'],
-  t.isbn = row['isbn'],
-  t.image = row['image_url'],
-  t.avg_rating = row['average_rating'],
+  t.title = row['title']
+  t.author = row['authors']
+  t.isbn = row['isbn']
+  t.image = row['image_url']
+  t.avg_rating = row['average_rating']
   t.save
-  # puts row.to_hash
-  puts "#{t.title}, #{t.author} saved"
+  puts "Hey there! #{t.title}, #{t.author} saved"
 end
 
 puts "There are now #{Book.count} rows in the books table"

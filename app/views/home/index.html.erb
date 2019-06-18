@@ -1,13 +1,12 @@
-<h1> hello world </h1>
+<h1> welcome to my bookstore! </h1>
 
-<div class="all-books">
+<div class="all-items">
   <% @books.each do |book| %>
+    <div class="book-card">
+        <div class="book-card-thumbnail">
+          <%= link_to image_tag(book.image), book_path(book) %>
+        </div>
         <%= book.title %>
-    <div class="product-card-thumbnail">
-
-    <%= image_tag(book.image) %>
-    </div> 
-    <%= book.author %>
-    <%= book.isbn %>
+    </div>
   <% end %>
 </div>

@@ -5,12 +5,30 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'csv'
+# require "csv"
 
-CSV.foreach("./data/books.csv", headers: true, header_converters: :symbol) do |row|
-  Book.create!(title: row[:title],
-               author: row[:authors],
-               isbn: row[:isbn],
-               image: URI.parse(row[:image_url]).open,
-               avg_rating: row[:average_rating]
+# CSV.foreach("./data/books.csv", headers: true, header_converters: :symbol, encoding: "iso-8859-1:utf-8") do |row|
+#   Book.create!(title: row[:title],
+#                author: row[:authors],
+#                isbn: row[:isbn],
+#                image: Rails.root.join("app/assets/images/books/#{row[:goodreads_book_id]}.jpg").open,
+#                avg_rating: row[:average_rating])
+# end
+
+require "csv"
+
+csv_text = File.read(Rails.root.join("./data/books.csv"))
+csv = CSV.parse(csv_text.scrub, headers: true)
+csv.each do |row|
+  t = Book.new
+  t.title = row['title'],
+  t.author = row['authors'],
+  t.isbn = row['isbn'],
+  t.image = row['image_url'],
+  t.avg_rating = row['average_rating'],
+  t.save
+  # puts row.to_hash
+  puts "#{t.title}, #{t.author} saved"
 end
+
+puts "There are now #{Book.count} rows in the books table"

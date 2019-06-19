@@ -4,7 +4,7 @@
   <% @books.each do |book| %>
     <div class="book-card">
         <div class="book-card-thumbnail">
-          <%= link_to image_tag(book.image), book_path(book) %>
+          <%= link_to image_tag(book.image), book_path(book) unless book.image.nil?  %>
         </div>
         <%= book.title %>
     </div>

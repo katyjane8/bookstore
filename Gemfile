@@ -44,7 +44,7 @@ group :development, :test do
   gem "launchy"
   gem "pry"
   gem "faker"
-  gem "factory_bot_rails"
+  gem "factory_bot_rails", '~> 4.11.1'
 end
 
 group :development do
